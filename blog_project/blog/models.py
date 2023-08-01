@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from taggit.managers import TaggableManager
+
 
 
 class PublishedManager(models.Manager):
@@ -14,6 +16,7 @@ class Post(models.Model):
         DRAFT = 'DF', 'Draft'
         PUBLISHED = 'PB', 'Published'
 
+    tags = TaggableManager()
     title = models.CharField(max_length=250, verbose_name='Название')
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User,
